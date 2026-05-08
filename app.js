@@ -437,6 +437,7 @@ class LumiaDemo {
       } else if (token === "(") {
         operators.push(token);
       } else if (token === ")") {
+        if (!operators.includes("(")) return "0";
         while (operators.length && operators[operators.length - 1] !== "(") {
           output.push(operators.pop());
         }
@@ -508,7 +509,7 @@ class LumiaDemo {
     title.textContent = new Date(year, month).toLocaleDateString([], { month: "long", year: "numeric" });
 
     const grid = document.getElementById("calendar-grid");
-    grid.innerHTML = "";
+    grid.replaceChildren();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -554,7 +555,7 @@ class LumiaDemo {
   }
 
   renderNotifications() {
-    this.el.notificationList.innerHTML = "";
+    this.el.notificationList.replaceChildren();
     this.state.notifications.forEach((n) => {
       const li = document.createElement("li");
       li.textContent = n;
@@ -569,7 +570,7 @@ class LumiaDemo {
   }
 
   updateMultitaskCards() {
-    this.el.multitaskCards.innerHTML = "";
+    this.el.multitaskCards.replaceChildren();
     if (!this.state.appHistory.length) {
       const empty = document.createElement("button");
       empty.type = "button";
