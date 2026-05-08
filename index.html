@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nokia Lumia Browser Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="stage" aria-label="Lumia simulator">
+      <section class="phone" aria-live="polite">
+        <header class="phone-hardware top">
+          <div class="camera-dot" aria-hidden="true"></div>
+          <div class="speaker-grill" aria-hidden="true"></div>
+          <div class="sensor-dot" aria-hidden="true"></div>
+        </header>
+
+        <div class="screen-shell">
+          <div class="screen-glare" aria-hidden="true"></div>
+
+          <section id="boot-screen" class="layer boot-screen active" aria-label="Startup sequence">
+            <div class="boot-logo">NOKIA</div>
+            <div class="boot-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="boot-subtitle">windows phone</div>
+          </section>
+
+          <section id="lock-screen" class="layer lock-screen" aria-label="Lock screen">
+            <div class="lock-wallpaper" aria-hidden="true"></div>
+            <div class="lock-content">
+              <p id="lock-time" class="lock-time">00:00</p>
+              <p id="lock-date" class="lock-date">Monday, January 1</p>
+              <div class="lock-notifications" aria-hidden="true">
+                <span>✉</span>
+                <span>☎</span>
+                <span>☁</span>
+              </div>
+            </div>
+            <div class="unlock-hint">Swipe up to unlock</div>
+          </section>
+
+          <section id="os-screen" class="layer os-screen" aria-label="Windows Phone interface">
+            <header class="status-bar">
+              <span id="status-time">00:00</span>
+              <div class="status-icons" aria-hidden="true">
+                <span id="signal-icon">▂▄▆</span>
+                <span>Wi‑Fi</span>
+                <span id="battery-icon">▰▰▰▱</span>
+              </div>
+            </header>
+
+            <div id="notification-center" class="notification-center" aria-hidden="true">
+              <h2>Notifications</h2>
+              <ul id="notification-list"></ul>
+            </div>
+
+            <div id="section-viewport" class="section-viewport">
+              <section id="home-section" class="section home-section active" aria-label="Home screen">
+                <header class="section-title">start</header>
+                <div id="tile-grid" class="tile-grid" aria-label="Live tiles">
+                  <button class="tile wide live" draggable="true" data-app="phone"><span>Phone</span><small id="missed-calls">2 missed</small></button>
+                  <button class="tile medium live" draggable="true" data-app="messaging"><span>Messaging</span><small id="message-preview">New: See you at 8</small></button>
+                  <button class="tile medium" draggable="true" data-app="camera"><span>Camera</span></button>
+                  <button class="tile small" draggable="true" data-app="photos"><span>Photos</span></button>
+                  <button class="tile medium live" draggable="true" data-app="music"><span>Music</span><small id="music-now">Now: Lumia Groove</small></button>
+                  <button class="tile small" draggable="true" data-app="calculator"><span>Calc</span></button>
+                  <button class="tile wide live" draggable="true" data-app="weather"><span>Weather</span><small id="weather-tile">21°C · Sunny</small></button>
+                  <button class="tile medium" draggable="true" data-app="settings"><span>Settings</span></button>
+                  <button class="tile medium" draggable="true" data-app="calendar"><span>Calendar</span></button>
+                  <button class="tile wide" draggable="true" data-app="browser"><span>Browser</span></button>
+                </div>
+              </section>
+
+              <section id="apps-section" class="section apps-section" aria-label="App list">
+                <header class="section-title">apps</header>
+                <ul class="app-list" id="app-list">
+                  <li><button data-app="browser">Browser</button></li>
+                  <li><button data-app="calculator">Calculator</button></li>
+                  <li><button data-app="calendar">Calendar</button></li>
+                  <li><button data-app="camera">Camera</button></li>
+                  <li><button data-app="messaging">Messaging</button></li>
+                  <li><button data-app="music">Music + Videos</button></li>
+                  <li><button data-app="phone">Phone</button></li>
+                  <li><button data-app="photos">Photos</button></li>
+                  <li><button data-app="settings">Settings</button></li>
+                  <li><button data-app="weather">Weather</button></li>
+                </ul>
+              </section>
+            </div>
+
+            <section id="app-host" class="app-host" aria-label="Open app container">
+              <article class="app-screen" data-app="phone">
+                <header class="app-header"><button class="app-back">←</button><h3>phone</h3></header>
+                <div class="app-body dialer">
+                  <p id="dialer-display" class="dialer-display">&nbsp;</p>
+                  <div class="dial-pad" id="dial-pad"></div>
+                  <button id="dial-call" class="primary-btn">Call</button>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="messaging">
+                <header class="app-header"><button class="app-back">←</button><h3>messaging</h3></header>
+                <div class="app-body messages">
+                  <ul id="message-thread" class="message-thread"></ul>
+                  <form id="message-form" class="message-form">
+                    <input id="message-input" type="text" placeholder="Type message" aria-label="Message input" />
+                    <button type="submit" class="primary-btn">Send</button>
+                  </form>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="camera">
+                <header class="app-header"><button class="app-back">←</button><h3>camera</h3></header>
+                <div class="app-body camera-ui">
+                  <div id="camera-viewfinder" class="viewfinder">Ready to capture</div>
+                  <button id="camera-shutter" class="primary-btn">Shutter</button>
+                  <p id="camera-counter">Photos taken: 0</p>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="photos">
+                <header class="app-header"><button class="app-back">←</button><h3>photos</h3></header>
+                <div class="app-body photos-grid" id="photos-grid"></div>
+              </article>
+
+              <article class="app-screen" data-app="music">
+                <header class="app-header"><button class="app-back">←</button><h3>music + videos</h3></header>
+                <div class="app-body music-player">
+                  <p id="track-name">Lumia Groove</p>
+                  <div class="progress"><div id="track-progress"></div></div>
+                  <div class="music-controls">
+                    <button id="music-toggle" class="primary-btn">Play</button>
+                    <button id="music-next" class="ghost-btn">Next</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="calculator">
+                <header class="app-header"><button class="app-back">←</button><h3>calculator</h3></header>
+                <div class="app-body calculator">
+                  <p id="calc-display">0</p>
+                  <div id="calc-grid" class="calc-grid"></div>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="weather">
+                <header class="app-header"><button class="app-back">←</button><h3>weather</h3></header>
+                <div class="app-body weather">
+                  <p id="weather-main">21°C</p>
+                  <p id="weather-desc">Sunny</p>
+                  <p id="weather-updated">Updated now</p>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="settings">
+                <header class="app-header"><button class="app-back">←</button><h3>settings</h3></header>
+                <div class="app-body settings">
+                  <label>Accent color
+                    <select id="accent-select">
+                      <option value="#00a2ed">Lumia Blue</option>
+                      <option value="#ff4b9b">Magenta</option>
+                      <option value="#6cc644">Lime</option>
+                      <option value="#ff9f1c">Orange</option>
+                    </select>
+                  </label>
+                  <label class="toggle-row">Light theme <input id="theme-toggle" type="checkbox" /></label>
+                  <label class="toggle-row">Battery charging animation <input id="charge-toggle" type="checkbox" checked /></label>
+                  <button id="show-multitask" class="ghost-btn">Open app switcher</button>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="calendar">
+                <header class="app-header"><button class="app-back">←</button><h3>calendar</h3></header>
+                <div class="app-body calendar">
+                  <h4 id="calendar-title"></h4>
+                  <div id="calendar-grid" class="calendar-grid"></div>
+                </div>
+              </article>
+
+              <article class="app-screen" data-app="browser">
+                <header class="app-header"><button class="app-back">←</button><h3>internet explorer</h3></header>
+                <div class="app-body browser">
+                  <form id="browser-form" class="browser-form">
+                    <input id="browser-url" type="text" value="bing.com" aria-label="Address bar" />
+                    <button type="submit" class="primary-btn">Go</button>
+                  </form>
+                  <section id="browser-page" class="browser-page">
+                    <h4>Bing</h4>
+                    <p>Search the web from your Lumia-inspired browser mockup.</p>
+                  </section>
+                </div>
+              </article>
+            </section>
+
+            <section id="multitask-view" class="multitask-view" aria-hidden="true">
+              <h2>Open apps</h2>
+              <div id="multitask-cards" class="multitask-cards"></div>
+            </section>
+
+            <div id="toast-container" class="toast-container" aria-live="assertive"></div>
+          </section>
+        </div>
+
+        <footer class="phone-hardware bottom">
+          <button id="btn-back" class="cap-btn" aria-label="Back">◁</button>
+          <button id="btn-home" class="cap-btn" aria-label="Home">◻</button>
+          <button id="btn-search" class="cap-btn" aria-label="Search">○</button>
+        </footer>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
