@@ -22,6 +22,7 @@ class LumiaDemo {
     ];
 
     this.appNames = ["phone", "messaging", "camera", "photos", "music", "calculator", "weather", "settings", "calendar", "browser"];
+    this.maxDialerLength = 20;
     this.el = {};
   }
 
@@ -316,7 +317,7 @@ class LumiaDemo {
     document.getElementById("dial-pad").addEventListener("click", (e) => {
       const digit = e.target.dataset.dial;
       if (!digit) return;
-      display.textContent = (display.textContent.trim() + digit).slice(0, 20);
+      display.textContent = (display.textContent.trim() + digit).slice(0, this.maxDialerLength);
     });
 
     document.getElementById("dial-call").addEventListener("click", () => {
@@ -415,6 +416,8 @@ class LumiaDemo {
 
   safeEval(expr) {
     if (!/^[0-9+\-*/.()\s]+$/.test(expr)) return "0";
+    const compact = expr.replace(/\s+/g, "");
+    if (!compact || /[+\-*/]{2,}/.test(compact) || /[+\-*/]$/.test(compact)) return "0";
     const tokens = expr.match(/\d*\.?\d+|[()+\-*/]/g);
     if (!tokens) return "0";
 
@@ -469,10 +472,11 @@ class LumiaDemo {
       if (item === "+") stack.push(a + b);
       if (item === "-") stack.push(a - b);
       if (item === "*") stack.push(a * b);
-      if (item === "/") stack.push(b === 0 ? 0 : a / b);
+      if (item === "/") stack.push(b === 0 ? "Error" : a / b);
     }
 
     const result = stack.pop();
+    if (result === "Error") return "Error";
     return Number.isFinite(result) ? String(result) : "0";
   }
 
