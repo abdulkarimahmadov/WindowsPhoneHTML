@@ -415,12 +415,59 @@ class LumiaDemo {
 
   safeEval(expr) {
     if (!/^[0-9+\-*/.()\s]+$/.test(expr)) return "0";
-    try {
-      const result = Function(`"use strict"; return (${expr})`)();
-      return Number.isFinite(result) ? String(result) : "0";
-    } catch {
-      return "0";
+    const tokens = expr.match(/\d*\.?\d+|[()+\-*/]/g);
+    if (!tokens) return "0";
+
+    const output = [];
+    const operators = [];
+    const precedence = { "+": 1, "-": 1, "*": 2, "/": 2 };
+
+    for (const token of tokens) {
+      if (/^\d*\.?\d+$/.test(token)) {
+        output.push(Number(token));
+      } else if (token in precedence) {
+        while (
+          operators.length &&
+          operators[operators.length - 1] in precedence &&
+          precedence[operators[operators.length - 1]] >= precedence[token]
+        ) {
+          output.push(operators.pop());
+        }
+        operators.push(token);
+      } else if (token === "(") {
+        operators.push(token);
+      } else if (token === ")") {
+        while (operators.length && operators[operators.length - 1] !== "(") {
+          output.push(operators.pop());
+        }
+        if (!operators.length) return "0";
+        operators.pop();
+      }
     }
+
+    while (operators.length) {
+      const op = operators.pop();
+      if (op === "(" || op === ")") return "0";
+      output.push(op);
+    }
+
+    const stack = [];
+    for (const item of output) {
+      if (typeof item === "number") {
+        stack.push(item);
+        continue;
+      }
+      const b = stack.pop();
+      const a = stack.pop();
+      if (typeof a !== "number" || typeof b !== "number") return "0";
+      if (item === "+") stack.push(a + b);
+      if (item === "-") stack.push(a - b);
+      if (item === "*") stack.push(a * b);
+      if (item === "/") stack.push(b === 0 ? 0 : a / b);
+    }
+
+    const result = stack.pop();
+    return Number.isFinite(result) ? String(result) : "0";
   }
 
   bindSettings() {
@@ -445,7 +492,13 @@ class LumiaDemo {
       e.preventDefault();
       const url = document.getElementById("browser-url").value.trim() || "bing.com";
       const host = url.replace(/^https?:\/\//, "").split("/")[0];
-      document.getElementById("browser-page").innerHTML = `<h4>${host}</h4><p>This is a local Lumia browser mockup rendering ${host}.</p>`;
+      const page = document.getElementById("browser-page");
+      page.replaceChildren();
+      const h4 = document.createElement("h4");
+      h4.textContent = host;
+      const p = document.createElement("p");
+      p.textContent = `This is a local Lumia browser mockup rendering ${host}.`;
+      page.append(h4, p);
       this.showToast(`Loaded ${host}`);
     });
   }
