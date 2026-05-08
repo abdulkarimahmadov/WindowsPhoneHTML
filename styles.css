@@ -31,7 +31,7 @@ body {
 }
 
 .phone {
-  width: min(92vw, 380px);
+  width: min(96vw, 430px);
   aspect-ratio: 9 / 18.5;
   background: linear-gradient(170deg, #0e1118, #05070b);
   border-radius: 42px;
@@ -794,7 +794,7 @@ body {
 
 @media (max-width: 560px) {
   .phone {
-    width: min(100vw, 360px);
+    width: min(100vw, 390px);
     border-radius: 34px;
   }
 
