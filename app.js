@@ -10,7 +10,7 @@ class LumiaDemo {
       musicPlaying: false,
       progress: 0,
       chargeEnabled: true,
-      calcExpr: "0",
+      calcExpression: "0",
       photoCount: 0,
     };
 
@@ -403,14 +403,14 @@ class LumiaDemo {
       if (!key) return;
 
       if (key === "C") {
-        this.state.calcExpr = "0";
+        this.state.calcExpression = "0";
       } else if (key === "=") {
-        this.state.calcExpr = this.safeEval(this.state.calcExpr);
+        this.state.calcExpression = this.safeEval(this.state.calcExpression);
       } else {
-        this.state.calcExpr = this.state.calcExpr === "0" ? key : `${this.state.calcExpr}${key}`;
+        this.state.calcExpression = this.state.calcExpression === "0" ? key : `${this.state.calcExpression}${key}`;
       }
 
-      display.textContent = this.state.calcExpr;
+      display.textContent = this.state.calcExpression;
     });
   }
 
@@ -472,7 +472,10 @@ class LumiaDemo {
       if (item === "+") stack.push(a + b);
       if (item === "-") stack.push(a - b);
       if (item === "*") stack.push(a * b);
-      if (item === "/") stack.push(b === 0 ? "Error" : a / b);
+      if (item === "/") {
+        if (b === 0) return "Error";
+        stack.push(a / b);
+      }
     }
 
     const result = stack.pop();
