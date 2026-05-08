@@ -437,12 +437,16 @@ class LumiaDemo {
       } else if (token === "(") {
         operators.push(token);
       } else if (token === ")") {
-        if (!operators.includes("(")) return "0";
-        while (operators.length && operators[operators.length - 1] !== "(") {
+        let foundOpen = false;
+        while (operators.length) {
+          if (operators[operators.length - 1] === "(") {
+            foundOpen = true;
+            operators.pop();
+            break;
+          }
           output.push(operators.pop());
         }
-        if (!operators.length) return "0";
-        operators.pop();
+        if (!foundOpen) return "0";
       }
     }
 
@@ -460,6 +464,7 @@ class LumiaDemo {
       }
       const b = stack.pop();
       const a = stack.pop();
+      if (typeof a === "undefined" || typeof b === "undefined") return "0";
       if (typeof a !== "number" || typeof b !== "number") return "0";
       if (item === "+") stack.push(a + b);
       if (item === "-") stack.push(a - b);
