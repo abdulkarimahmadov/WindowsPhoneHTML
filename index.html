@@ -14,30 +14,33 @@
         </div>
 
         <div class="tiles" id="tile-grid">
-          <button class="tile large mosaic" aria-label="People"><span>People</span></button>
-          <button class="tile large orange" aria-label="Office"><div class="tile-icon">◻</div><span>Office</span></button>
+          <button class="tile large mosaic" aria-label="People"><span class="tile-label">People</span></button>
+          <button class="tile large orange" aria-label="Office"><div class="tile-icon office"></div><span class="tile-label">Office</span></button>
 
-          <button class="tile large" aria-label="HERE Maps"><div class="tile-icon">⌖</div><span>HERE Maps</span></button>
+          <button class="tile large" aria-label="HERE Maps"><div class="tile-icon compass"></div><span class="tile-label">HERE Maps</span></button>
           <button class="tile small white" aria-label="BIGFLIX"><div class="wordmark">BIG<br />FLIX</div></button>
-          <button class="tile small" aria-label="App Highlights"><div class="tile-icon">▦</div></button>
-          <button class="tile small" aria-label="Contacts"><div class="tile-icon">☺</div></button>
-          <button class="tile small" aria-label="Cinemagraph"><div class="tile-icon">▧</div></button>
+          <button class="tile small" aria-label="App Highlights"><div class="tile-icon grid"></div></button>
+          <button class="tile small" aria-label="Contacts"><div class="tile-icon contacts"></div></button>
+          <button class="tile small" aria-label="Cinemagraph"><div class="tile-icon media"></div></button>
 
-          <button class="tile large" aria-label="HERE Drive"><div class="tile-icon">◔</div><span>HERE Drive</span></button>
-          <button class="tile large" aria-label="Nokia Music"><div class="tile-icon">♫</div><span>Nokia Music</span></button>
+          <button class="tile large" aria-label="HERE Drive"><div class="tile-icon car"></div><span class="tile-label">HERE Drive</span></button>
+          <button class="tile large" aria-label="Nokia Music"><div class="tile-icon music">♪</div><span class="tile-label">Nokia Music</span></button>
 
-          <button class="tile wide" aria-label="Extra tile"></button>
+          <button class="tile wide" aria-hidden="true"></button>
         </div>
       </section>
 
       <section class="apps-panel" aria-label="App list">
         <div class="panel-top panel-top-apps">
-          <button class="search-btn" aria-label="Search">⌕</button>
           <span class="panel-time" id="time-right">09:10</span>
         </div>
 
         <ul class="apps-list">
-          <li><span class="app-icon">⏰</span><span>Alarms</span></li>
+          <li>
+            <span class="search-mark" aria-hidden="true">⌕</span>
+            <span class="app-icon">⏰</span>
+            <span>Alarms</span>
+          </li>
           <li><span class="app-icon">▦</span><span>App Highlights</span></li>
           <li><span class="app-icon white">BIG</span><span>BIGFLIX</span></li>
           <li><span class="app-icon">⌗</span><span>Calculator</span></li>
